@@ -194,3 +194,11 @@ properties:
     disable: true
   - property: power_value
     disable: true
+
+  # Unsupported diagnostic flags for absent Variable room, Holiday and Lock Fresh features.
+  - property: refrigerator_var_room_sens_failure
+    disable: true
+  - property: existing_holiday_mode
+    disable: true
+  - property: existing_lock_fresh_mode
+    disable: true
