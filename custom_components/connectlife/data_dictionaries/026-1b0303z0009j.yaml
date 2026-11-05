@@ -205,3 +205,7 @@ properties:
   # Alternate API property for the unsupported Variable room sensor.
   - property: refr_var_room_sens_failure
     disable: true
+
+  # No usable humidity readings on this refrigerator (constant 0% in HA history).
+  - property: real_humidity
+    disable: true
