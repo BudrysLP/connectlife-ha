@@ -202,3 +202,6 @@ properties:
     disable: true
   - property: existing_lock_fresh_mode
     disable: true
+  # Alternate API property for the unsupported Variable room sensor.
+  - property: refr_var_room_sens_failure
+    disable: true
