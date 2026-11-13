@@ -6,23 +6,32 @@ statistics:
 properties:
   # Range reported by refrigerator_min_temperature / refrigerator_max_temperature
   - property: refrigerator_temperature
+    icon: mdi:fridge-outline
     number:
       min_value: 2
       max_value: 8
 
+  # Override the icon only; retain the generic temperature command and range.
+  - property: freeze_temperature
+    icon: mdi:thermometer-low
+
   # Show supported operating modes alongside temperature controls.
   # Inherit the switch command mappings from the generic 026.yaml.
   - property: save_mode
+    icon: mdi:leaf
     entity_category: null
   - property: sr_mode
+    icon: mdi:weather-snowy
     entity_category: null
   - property: sf_mode
+    icon: mdi:snowflake-alert
     entity_category: null
 
   # Read-only conversion mode feedback confirmed on FT3K310SAFC:
   # 0 = freezer, 1 = refrigerator. Do not expose a writable switch
   # until the device-specific API command has been verified.
   - property: refrigerator_freeze_swith_state
+    icon: mdi:fridge-outline
     entity_category: diagnostic
     binary_sensor:
       options:
