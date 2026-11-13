@@ -31,6 +31,7 @@ properties:
   # 0 = freezer, 1 = refrigerator. Do not expose a writable switch
   # until the device-specific API command has been verified.
   - property: refrigerator_freeze_swith_state
+    optional: false
     icon: mdi:fridge-outline
     entity_category: diagnostic
     binary_sensor:
