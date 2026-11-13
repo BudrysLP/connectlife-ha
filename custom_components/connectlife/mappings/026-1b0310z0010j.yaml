@@ -27,6 +27,13 @@ properties:
     icon: mdi:snowflake-alert
     entity_category: null
 
+  # Expose the second conversion-related API field as read-only diagnostic.
+  # Its semantics are not yet confirmed; no writable command is configured.
+  - property: refrigerator_freeze_swith
+    optional: false
+    entity_category: diagnostic
+    icon: mdi:fridge-outline
+
   # Read-only conversion mode feedback confirmed on FT3K310SAFC:
   # 0 = freezer, 1 = refrigerator. Do not expose a writable switch
   # until the device-specific API command has been verified.
