@@ -159,7 +159,13 @@ class ConnectLifeStatusSensor(ConnectLifeEntity, SensorEntity):
             entity_registry_visible_default=not dd_entry.hide,
             entity_registry_enabled_default=not dd_entry.optional,
             icon=dd_entry.icon,
-            name=status.replace("_", " "),
+            name=(
+                "Conversion switch status"
+                if status == "refrigerator_freeze_swith"
+                and appliance.device_type_code == "026"
+                and appliance.device_feature_code == "1b0310z0010j"
+                else status.replace("_", " ")
+            ),
             native_unit_of_measurement=to_unit(
                 dd_entry.sensor.unit, appliance=appliance, mapping=mapping
             ),
