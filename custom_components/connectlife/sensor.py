@@ -55,6 +55,15 @@ async def async_setup_entry(
             and has_platform(Platform.SENSOR, mapping.properties[s])
             and s not in climate_bound
         )
+        # FT3K310SAFC: human-readable, read-only conversion mode.
+        if (
+            appliance.device_type_code == "026"
+            and appliance.device_feature_code == "1b0310z0010j"
+            and "refrigerator_freeze_swith_state" in appliance.status_list
+        ):
+            async_add_entities(
+                [ConnectLifeFreezerConversionModeSensor(coordinator, appliance)]
+            )
         async_add_entities(
             ConnectLifeStatusSensor(
                 coordinator, appliance, name, prop, mapping
@@ -84,6 +93,30 @@ async def async_setup_entry(
         {vol.Required("value"): cv.positive_int},
         "async_set_value",
     )
+
+
+class ConnectLifeFreezerConversionModeSensor(ConnectLifeEntity, SensorEntity):
+    """Read-only operating mode for Hisense FT3K310SAFC."""
+
+    _attr_icon = "mdi:fridge-outline"
+    _attr_name = "Tryb pracy"
+
+    def __init__(self, coordinator: ConnectLifeCoordinator, appliance: ConnectLifeAppliance):
+        super().__init__(coordinator, appliance, "conversion_operating_mode", Platform.SENSOR)
+        self._unavailable_status = "refrigerator_freeze_swith_state"
+        self._attr_options = ["Zamrażarka", "Chłodziarka"]
+        self._attr_device_class = SensorDeviceClass.ENUM
+        self._refresh_state()
+
+    @callback
+    def update_state(self):
+        appliance = self.coordinator.data.get(self.device_id)
+        value = (
+            appliance.status_list.get("refrigerator_freeze_swith_state")
+            if appliance is not None
+            else None
+        )
+        self._attr_native_value = {0: "Zamrażarka", 1: "Chłodziarka"}.get(value)
 
 
 class ConnectLifeStatusSensor(ConnectLifeEntity, SensorEntity):
