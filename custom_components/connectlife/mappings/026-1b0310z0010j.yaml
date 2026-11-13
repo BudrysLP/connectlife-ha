@@ -9,3 +9,11 @@ properties:
     number:
       min_value: 2
       max_value: 8
+  # Read-only physical freezer/refrigerator mode feedback verified in device logs.
+  # Do not expose a writable switch until the API command is confirmed.
+  - property: refrigerator_freeze_swith_state
+    entity_category: diagnostic
+    binary_sensor:
+      options:
+        0: false
+        1: true
