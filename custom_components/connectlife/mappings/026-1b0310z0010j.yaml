@@ -9,3 +9,12 @@ properties:
     number:
       min_value: 2
       max_value: 8
+
+  # Show supported operating modes alongside temperature controls.
+  # Inherit the switch command mappings from the generic 026.yaml.
+  - property: save_mode
+    entity_category: null
+  - property: sr_mode
+    entity_category: null
+  - property: sf_mode
+    entity_category: null
