@@ -18,3 +18,13 @@ properties:
     entity_category: null
   - property: sf_mode
     entity_category: null
+
+  # Read-only conversion mode feedback confirmed on FT3K310SAFC:
+  # 0 = freezer, 1 = refrigerator. Do not expose a writable switch
+  # until the device-specific API command has been verified.
+  - property: refrigerator_freeze_swith_state
+    entity_category: diagnostic
+    binary_sensor:
+      options:
+        0: false
+        1: true
