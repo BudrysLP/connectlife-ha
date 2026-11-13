@@ -75,7 +75,13 @@ class ConnectLifeBinaryStatusSensor(ConnectLifeEntity, BinarySensorEntity):
             entity_registry_visible_default=not dd_entry.hide,
             entity_registry_enabled_default=not dd_entry.optional,
             icon=dd_entry.icon,
-            name=status.replace("_", " "),
+            name=(
+                "Conversion mode status"
+                if status == "refrigerator_freeze_swith_state"
+                and appliance.device_type_code == "026"
+                and appliance.device_feature_code == "1b0310z0010j"
+                else status.replace("_", " ")
+            ),
             translation_key=self.to_translation_key(dd_entry.translation_key or status),
             device_class=dd_entry.binary_sensor.device_class,
             entity_category=dd_entry.entity_category,
