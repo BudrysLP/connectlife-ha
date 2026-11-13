@@ -99,12 +99,12 @@ class ConnectLifeFreezerConversionModeSensor(ConnectLifeEntity, SensorEntity):
     """Read-only operating mode for Hisense FT3K310SAFC."""
 
     _attr_icon = "mdi:fridge-outline"
-    _attr_name = "Tryb pracy"
+    _attr_name = "Operating mode"
 
     def __init__(self, coordinator: ConnectLifeCoordinator, appliance: ConnectLifeAppliance):
         super().__init__(coordinator, appliance, "conversion_operating_mode", Platform.SENSOR)
         self._unavailable_status = "refrigerator_freeze_swith_state"
-        self._attr_options = ["Zamrażarka", "Chłodziarka"]
+        self._attr_options = ["Freezer", "Refrigerator"]
         self._attr_device_class = SensorDeviceClass.ENUM
         self._refresh_state()
 
@@ -116,7 +116,7 @@ class ConnectLifeFreezerConversionModeSensor(ConnectLifeEntity, SensorEntity):
             if appliance is not None
             else None
         )
-        self._attr_native_value = {0: "Zamrażarka", 1: "Chłodziarka"}.get(value)
+        self._attr_native_value = {0: "Freezer", 1: "Refrigerator"}.get(value)
 
 
 class ConnectLifeStatusSensor(ConnectLifeEntity, SensorEntity):
